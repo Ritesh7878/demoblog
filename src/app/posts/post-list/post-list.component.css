@@ -1,5 +1,5 @@
 section {
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
     grid-template-rows: auto;
     grid-gap: 10px;
@@ -9,5 +9,8 @@ section {
   mat-card {
     margin: 10px 0;
   }
-  
+  .post-mat-card{
+    max-width: 300px;
+  }
+
   

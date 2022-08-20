@@ -8,9 +8,17 @@
             <input matInput placeholder="Post Title" [(ngModel)]="post.title" name="title">
           </mat-form-field>
           <br>
-          <mat-form-field>
-            <textarea matInput placeholder="Post Content" [(ngModel)]="post.content" name="content" rows="10"></textarea>
-          </mat-form-field>
+          
+              <div matInput class="NgxEditor__Wrapper">
+              <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+              <ngx-editor 
+                [editor]="editor"
+                [(ngModel)]="post.content"
+                [disabled]="false"
+                [placeholder]="'Type here...'"
+              ></ngx-editor>
+            </div>
+          
           <br>
           <button mat-raised-button (click)="updatePost()" color="accent">Save</button>
           <button mat-button (click)="editing=false" *ngIf="editing">Cancel</button>
@@ -22,10 +30,10 @@
         <img mat-card-image src="{{post.image}}" alt="{{post.title}}">
         <h2>{{post.title}}</h2>
         <p>
-          <small>Posted by {{post.author}} &bull; on {{post.published}}</small>
+          <small>Posted by {{post.author}} &bull;</small>
         </p>
         <mat-card-content>
-          <p>{{ post.content }}</p>
+          <p [innerHTML]="post.content | safeHtml"></p>
         </mat-card-content>
         <mat-card-actions align="end" *ngIf="auth.currentUserId === post.authorId">
           <button mat-icon-button (click)="editing=true">

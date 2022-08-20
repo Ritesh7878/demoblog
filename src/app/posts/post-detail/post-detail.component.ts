@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Editor } from 'ngx-editor';
 import { AuthService } from 'src/app/core/auth.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
@@ -9,9 +10,10 @@ import { PostService } from '../post.service';
   templateUrl: './post-detail.component.html',
   styleUrls: ['./post-detail.component.css']
 })
-export class PostDetailComponent implements OnInit {
+export class PostDetailComponent implements OnInit, OnDestroy {
   post !: Post;
   editing: boolean = false;
+  editor: Editor;
 
   constructor(
     private route : ActivatedRoute,
@@ -19,8 +21,12 @@ export class PostDetailComponent implements OnInit {
     private postService : PostService,
     public auth: AuthService
     ) { }
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
 
   ngOnInit(): void {
+    this.editor = new Editor();
     this.getPost();
   }
 

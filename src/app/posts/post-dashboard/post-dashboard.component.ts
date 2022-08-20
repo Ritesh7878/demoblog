@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Editor } from 'ngx-editor';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
@@ -16,6 +17,7 @@ export class PostDashboardComponent implements OnInit {
   title : string = '';
   image : string = '';
   content : string = '';
+  editor : Editor;
 
   saving = 'Create Post'
 
